@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using xUnitWebApplication.Interface;
 
@@ -18,6 +19,7 @@ namespace xUnitWebApplication.Controllers
             _printerServices = printerServices;
         }
 
+        [HttpGet("Index")]
         public string Index(int num)
         {
             if (_emailServices.IsEmailAvailable())
@@ -41,6 +43,16 @@ namespace xUnitWebApplication.Controllers
                 return "You guessed correct number.";
             }
             
+        }
+        [HttpGet("Addition")]
+        public string Addition(int a, int b)
+        {
+            if (a > b)
+                return $"{a} is greater then {b} and addintion of {a} + {b} = {a+b}";
+            else if (a < b)
+                return $"{a} is lesser then {b} and addintion of {a} + {b} = {a+b}";
+            else
+                return $"{a} is equal to {b} and addintion of {a} + {b} = {a+b}";
         }
     }
 }
